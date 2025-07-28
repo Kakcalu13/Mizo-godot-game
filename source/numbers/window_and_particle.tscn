@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk8vy7xbp7wea"]
+
+[ext_resource type="PackedScene" uid="uid://cn0gk070e5ekj" path="res://assets/window.glb" id="1_7h4cw"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bk6ha"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, -9.775, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xhql"]
+albedo_color = Color(0.971391, 0.942483, 2.31028e-06, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2k5uj"]
+material = SubResource("StandardMaterial3D_4xhql")
+radius = 0.05
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_inkfh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qtt7w"]
+size = Vector3(6, 6.505, 3)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="window" parent="." instance=ExtResource("1_7h4cw")]
+
+[node name="right_side" type="GPUParticles3D" parent="window"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99406, 5.43618, 2.36391)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_bk6ha")
+draw_pass_1 = SubResource("SphereMesh_2k5uj")
+
+[node name="left_side" type="GPUParticles3D" parent="window"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7886, 4.11574, 3.12194)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_bk6ha")
+draw_pass_1 = SubResource("SphereMesh_2k5uj")
+
+[node name="top" type="GPUParticles3D" parent="window"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106527, 7.55829, 0.833532)
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_bk6ha")
+draw_pass_1 = SubResource("SphereMesh_2k5uj")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_inkfh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.74243, 0)
+shape = SubResource("BoxShape3D_qtt7w")
+
+[editable path="window"]
