@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4xowr8t8dl4t"]
+
+[ext_resource type="PackedScene" uid="uid://dk8vy7xbp7wea" path="res://window_and_particle.tscn" id="1_cwvvw"]
+[ext_resource type="PackedScene" uid="uid://cj1h7tifsha4u" path="res://image_display.tscn" id="2_08k7x"]
+
+[node name="one_module" type="Node3D"]
+
+[node name="window" parent="." instance=ExtResource("1_cwvvw")]
+
+[node name="text" parent="." instance=ExtResource("2_08k7x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49799, 0)
