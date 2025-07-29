@@ -41,6 +41,9 @@ size = Vector3(0.1, 0.1, 0.1)
 
 [node name="window" parent="." instance=ExtResource("1_7h4cw")]
 
+[node name="Window" parent="window" index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
 [node name="CharacterBody3D" type="CharacterBody3D" parent="window/Window" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="window/Window/CharacterBody3D"]
@@ -48,7 +51,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.74243, 0)
 shape = SubResource("BoxShape3D_qtt7w")
 
 [node name="top" type="GPUParticles3D" parent="window"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.81196, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2.77588, 0)
 cast_shadow = 0
 amount = 150
 lifetime = 5.0

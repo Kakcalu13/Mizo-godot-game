@@ -1,15 +1,21 @@
-[gd_scene format=3 uid="uid://cj1h7tifsha4u"]
+[gd_scene load_steps=3 format=3 uid="uid://cj1h7tifsha4u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtmsv"]
+blend_mode = 1
+shading_mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_al5lm"]
+material = SubResource("StandardMaterial3D_xtmsv")
+size = Vector2(2, 2)
 
 [node name="Node3D" type="Node3D"]
 
-[node name="SubViewport" type="SubViewport" parent="."]
-render_target_update_mode = 4
+[node name="Text_3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+modulate = Color(0, 0, 0, 1)
+text = "blank"
 
-[node name="TextureRect" type="TextureRect" parent="SubViewport"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ColorRect" type="ColorRect" parent="SubViewport"]
-custom_minimum_size = Vector2(512, 512)
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="White_backgroudn" type="MeshInstance3D" parent="Text_3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+mesh = SubResource("QuadMesh_al5lm")
+skeleton = NodePath("")
