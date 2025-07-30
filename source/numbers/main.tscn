@@ -1,23 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://b40g1acxm6s62"]
+[gd_scene load_steps=7 format=3 uid="uid://b40g1acxm6s62"]
 
-[ext_resource type="Shader" path="res://assets/shaders/test.gdshader" id="1_1komv"]
 [ext_resource type="Shader" path="res://assets/shaders/red_diamond.gdshader" id="2_k40ad"]
+[ext_resource type="PackedScene" uid="uid://c4xowr8t8dl4t" path="res://one_module_text.tscn" id="2_wvgls"]
 
 [sub_resource type="Sky" id="Sky_y1yh4"]
 
 [sub_resource type="Environment" id="Environment_pwj41"]
 background_mode = 2
 sky = SubResource("Sky_y1yh4")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gs4gn"]
-shader = ExtResource("1_1komv")
-shader_parameter/speed = 1.0
-shader_parameter/outline_thickness = 0.002
-shader_parameter/center_offset_x = 0.0
-shader_parameter/center_offset_y = 0.0
+ambient_light_energy = 10.01
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_21vhr"]
-viewport_path = NodePath("Sprite3D/SubViewport")
+viewport_path = NodePath("background_shader/SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n6x5x"]
 shader = ExtResource("2_k40ad")
@@ -34,20 +28,23 @@ environment = SubResource("Environment_pwj41")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.66586)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(0.999221, -0.0366422, 0.0146614, 0.0362653, 0.999025, 0.0251912, -0.0155702, -0.0246398, 0.999575, 0, 0, 0)
-visible = false
-material_override = SubResource("ShaderMaterial_gs4gn")
-flip_faces = true
-size = Vector3(7, 5, 0)
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="background_shader" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.75665)
 texture = SubResource("ViewportTexture_21vhr")
 
-[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+[node name="SubViewport" type="SubViewport" parent="background_shader"]
 
-[node name="ColorRect" type="ColorRect" parent="Sprite3D/SubViewport"]
+[node name="ColorRect" type="ColorRect" parent="background_shader/SubViewport"]
 material = SubResource("ShaderMaterial_n6x5x")
 custom_minimum_size = Vector2(1080, 1080)
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="one_module" parent="." instance=ExtResource("2_wvgls")]
+transform = Transform3D(0.614158, 0.0356098, 0.511411, 0.0122909, 0.796815, -0.0702429, -0.512502, 0.0617825, 0.611167, -4.2653, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.0369, 0)
+
+[connection signal="mouse_entered" from="one_module" to="one_module" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="one_module" to="one_module" method="_on_mouse_exited"]
