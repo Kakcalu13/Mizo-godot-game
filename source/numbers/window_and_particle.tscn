@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dk8vy7xbp7wea"]
+[gd_scene load_steps=11 format=3 uid="uid://dk8vy7xbp7wea"]
 
 [ext_resource type="PackedScene" uid="uid://cn0gk070e5ekj" path="res://assets/window.glb" id="1_7h4cw"]
 
@@ -37,6 +37,28 @@ albedo_color = Color(1, 1, 0.0745098, 1)
 material = SubResource("StandardMaterial3D_22a4e")
 size = Vector3(0.1, 0.1, 0.1)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2dfom"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 0, 1)
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 2.0
+radial_accel_max = 2.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlsok"]
+emission_enabled = true
+emission = Color(0.25098, 0.568627, 0.882353, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_7lkv5"]
+material = SubResource("StandardMaterial3D_xlsok")
+radius = 0.025
+height = 0.05
+radial_segments = 8
+rings = 4
+
 [node name="Node3D" type="Node3D"]
 
 [node name="window" parent="." instance=ExtResource("1_7h4cw")]
@@ -58,5 +80,16 @@ lifetime = 5.0
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_xo2lj")
 draw_pass_1 = SubResource("BoxMesh_yi1rv")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="window"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.80292, -1.1456)
+amount = 1000
+lifetime = 1.5
+fixed_fps = 0
+interpolate = false
+collision_base_size = 0.04
+visibility_aabb = AABB(-1.63511, -1.25001, -1.31512, 3.0892, 2.15487, 2.91765)
+process_material = SubResource("ParticleProcessMaterial_2dfom")
+draw_pass_1 = SubResource("SphereMesh_7lkv5")
 
 [editable path="window"]
