@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdeh0b25f6370"]
+
+[ext_resource type="Texture2D" uid="uid://cm3gvqfqp2nhw" path="res://assets/signs/001.png" id="1_j24d0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtmsv"]
+blend_mode = 4
+shading_mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_al5lm"]
+material = SubResource("StandardMaterial3D_xtmsv")
+size = Vector2(2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77ral"]
+shading_mode = 0
+albedo_texture = ExtResource("1_j24d0")
+
+[sub_resource type="QuadMesh" id="QuadMesh_dksac"]
+material = SubResource("StandardMaterial3D_77ral")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="White_background" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_al5lm")
+skeleton = NodePath("")
+
+[node name="sign" type="MeshInstance3D" parent="White_background"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+mesh = SubResource("QuadMesh_dksac")
+skeleton = NodePath("")
