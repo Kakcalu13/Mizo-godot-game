@@ -24,6 +24,6 @@ mesh = SubResource("QuadMesh_al5lm")
 skeleton = NodePath("")
 
 [node name="sign" type="MeshInstance3D" parent="White_background"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0.01)
 mesh = SubResource("QuadMesh_dksac")
 skeleton = NodePath("")
