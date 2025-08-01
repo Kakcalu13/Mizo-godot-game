@@ -14,12 +14,15 @@ gradient = SubResource("Gradient_o8dgv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xo2lj"]
 emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
+emission_box_extents = Vector3(1, 0, 1)
 direction = Vector3(0, 1, 0)
 initial_velocity_min = 1.0
 initial_velocity_max = 1.0
 gravity = Vector3(0, 0, 0)
 color_ramp = SubResource("GradientTexture1D_3jc0t")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.5
 sub_emitter_mode = 2
 sub_emitter_amount_at_end = 1
 sub_emitter_keep_velocity = true
@@ -43,6 +46,8 @@ emission_box_extents = Vector3(1, 0, 1)
 gravity = Vector3(0, 0, 0)
 radial_accel_min = 2.0
 radial_accel_max = 2.0
+damping_min = 0.1
+damping_max = 0.1
 collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.5
@@ -72,17 +77,23 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.74243, 0)
 shape = SubResource("BoxShape3D_qtt7w")
 
+[node name="GPUParticlesCollisionSDF3D" type="GPUParticlesCollisionSDF3D" parent="window/Window" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.91526, 0)
+size = Vector3(6, 7, 4)
+
 [node name="top" type="GPUParticles3D" parent="window"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2.77588, 0)
 cast_shadow = 0
 amount = 150
 lifetime = 5.0
+fixed_fps = 0
 interpolate = false
+collision_base_size = 0.04
 process_material = SubResource("ParticleProcessMaterial_xo2lj")
 draw_pass_1 = SubResource("BoxMesh_yi1rv")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="window"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.80292, -1.1456)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.80292, -0.906654)
 amount = 1000
 lifetime = 1.5
 fixed_fps = 0
