@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://b40g1acxm6s62"]
+[gd_scene load_steps=8 format=3 uid="uid://b40g1acxm6s62"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_q0yfx"]
 [ext_resource type="Shader" path="res://assets/shaders/red_diamond.gdshader" id="2_k40ad"]
 [ext_resource type="PackedScene" uid="uid://c4xowr8t8dl4t" path="res://one_module_text.tscn" id="2_wvgls"]
 
@@ -24,6 +25,7 @@ shader_parameter/use_mouse_override = false
 
 [node name="Node3D" type="WorldEnvironment"]
 environment = SubResource("Environment_pwj41")
+script = ExtResource("1_q0yfx")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.66586)
