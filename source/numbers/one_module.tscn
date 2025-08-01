@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4xowr8t8dl4t"]
+[gd_scene load_steps=6 format=3 uid="uid://c4xowr8t8dl4t"]
 
 [ext_resource type="Script" path="res://src/one_module_clickable.gd" id="1_cdpov"]
 [ext_resource type="PackedScene" uid="uid://dk8vy7xbp7wea" path="res://window_and_particle.tscn" id="1_cwvvw"]
 [ext_resource type="PackedScene" uid="uid://cj1h7tifsha4u" path="res://image_display.tscn" id="2_08k7x"]
+[ext_resource type="PackedScene" uid="uid://bdeh0b25f6370" path="res://sign_display.tscn" id="4_2nwc2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2nmdx"]
-size = Vector3(4, 4, 3)
+size = Vector3(3.5, 3, 3)
 
 [node name="one_module" type="Area3D"]
 script = ExtResource("1_cdpov")
@@ -20,11 +21,16 @@ speed_scale = 2.0
 randomness = 1.0
 
 [node name="text" parent="." instance=ExtResource("2_08k7x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49799, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.498, 0.6)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5166, 0)
 shape = SubResource("BoxShape3D_2nmdx")
+
+[node name="sign" parent="." instance=ExtResource("4_2nwc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.498, 0.6)
+visible = false
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]
