@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/one_module_clickable.gd" id="1_cdpov"]
 [ext_resource type="PackedScene" uid="uid://dk8vy7xbp7wea" path="res://window_and_particle.tscn" id="1_cwvvw"]
 [ext_resource type="PackedScene" uid="uid://cj1h7tifsha4u" path="res://image_display.tscn" id="2_08k7x"]
-[ext_resource type="Texture2D" uid="uid://ddp8ek6rswwmc" path="res://assets/kenney/smoke_05.png" id="3_8xlau"]
+[ext_resource type="Texture2D" uid="uid://ddp8ek6rswwmc" path="res://assets/images_particles/smoke_05.png" id="3_8xlau"]
 [ext_resource type="PackedScene" uid="uid://bdeh0b25f6370" path="res://sign_display.tscn" id="4_2nwc2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cgumr"]
