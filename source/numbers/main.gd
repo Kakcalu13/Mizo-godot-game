@@ -9,6 +9,7 @@ var window_transforms = {
 	6: { position = Vector3(4.265, -3.5, 0), rotation = Vector3(0.087266, -0.087267, 0.015708), scale = Vector3(0.6, 0.6, 0.6) }
 }
 var window_list = []
+var banned_list = ["robocop.gdshader", "color_sky.gdshader"]
 var WindowScene = preload("res://one_module.tscn")
 
 func _ready() -> void:
@@ -71,7 +72,7 @@ func _load_random_shader_material() -> void:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if file_name.ends_with(".gdshader"):
+			if file_name.ends_with(".gdshader") and file_name not in banned_list:
 				var shader_res = load("res://assets/shaders/" + file_name)
 				shaders.append({"shader": shader_res, "filename": file_name})
 			file_name = dir.get_next()
