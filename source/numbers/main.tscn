@@ -1,35 +1,37 @@
 [gd_scene load_steps=9 format=3 uid="uid://b40g1acxm6s62"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_q0yfx"]
-[ext_resource type="Shader" path="res://assets/shaders/ice_randomized.gdshader" id="1_rg150"]
-[ext_resource type="Shader" path="res://assets/shaders/test.gdshader" id="3_3op8q"]
+[ext_resource type="Shader" path="res://assets/shaders/robocop.gdshader" id="1_rrgqu"]
+[ext_resource type="Shader" path="res://assets/shaders/floating_cyan.gdshader" id="3_4i743"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oy0cp"]
-shader = ExtResource("1_rg150")
-shader_parameter/time_scale = 1.0
-shader_parameter/tunnel_speed = 3.0
-shader_parameter/fractal_rotation_speed = 1.0
-shader_parameter/ray_steps = 99
-shader_parameter/density_multiplier = 1.0
-shader_parameter/color_tint = Color(1, 1.1, 1.2, 1)
+shader = ExtResource("1_rrgqu")
+shader_parameter/time_scale = 1.498
+shader_parameter/scene_time = 2.0
+shader_parameter/use_custom_time = false
+shader_parameter/enable_antialiasing = false
+shader_parameter/glow_intensity = 0.436
 
 [sub_resource type="Sky" id="Sky_0vvm6"]
 sky_material = SubResource("ShaderMaterial_oy0cp")
 
 [sub_resource type="Environment" id="Environment_pwj41"]
 background_mode = 2
+background_energy_multiplier = 0.5
 sky = SubResource("Sky_0vvm6")
-ambient_light_energy = 10.01
+sky_rotation = Vector3(0, 3.14159, 0)
+ambient_light_sky_contribution = 0.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_21vhr"]
 viewport_path = NodePath("background_shader/SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n6x5x"]
-shader = ExtResource("3_3op8q")
-shader_parameter/speed = 1.0
-shader_parameter/outline_thickness = 0.002
-shader_parameter/center_offset_x = 0.0
-shader_parameter/center_offset_y = 0.0
+render_priority = 0
+shader = ExtResource("3_4i743")
+shader_parameter/slide_speed = 0.3
+shader_parameter/wobble_speed = 1.0
+shader_parameter/wobble_intensity = 0.4
+shader_parameter/texture_scale = 0.2
 
 [node name="Node3D" type="WorldEnvironment"]
 environment = SubResource("Environment_pwj41")
