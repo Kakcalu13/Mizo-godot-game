@@ -107,13 +107,14 @@ func _stop_drag_effects():
 func _on_area_entered(area: Area3D) -> void:
 	if self.value == area.value:
 		var grab_player = get_node("./window/window/AnimationPlayer")
-		print(get_node("./text"))
 		get_node("./text").visible = false
 		get_node("./sign").visible = false
 		grab_player.active = true
+		get_node("./window/exploded").emitting = true
 	else:
 		_returning_home = true
 
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
+	
 	self.queue_free()
