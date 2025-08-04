@@ -24,7 +24,7 @@ const vec3 rainbow_colors[7] = {
 void fragment() {
     vec2 resolution = 1.0 / SCREEN_PIXEL_SIZE;
     float time = TIME;
-    
+
     // Calculate animated radius values for 7 circles (plus one zero radius)
     float radius[8];
     radius[0] = 0.0;
@@ -35,11 +35,11 @@ void fragment() {
     radius[5] = exp2(log(mod(time * (2.5 * speed), 10.0 / speed) / 9.0));
     radius[6] = exp2(log(mod(time * (3.0 * speed), 10.0 / speed) / 9.0));
     radius[7] = exp2(log(mod(time * (3.5 * speed), 10.0 / speed) / 9.0));
-    
+
     // Initialize color indices
     int ids[7];
     ids[0] = 0; ids[1] = 1; ids[2] = 2; ids[3] = 3; ids[4] = 4; ids[5] = 5; ids[6] = 6;
-    
+
     // Bubble sort to order circles by radius (maintaining color associations)
     float aux;
     int auxi;
@@ -50,7 +50,7 @@ void fragment() {
                 aux = radius[a];
                 radius[a] = radius[b];
                 radius[b] = aux;
-                
+
                 // Swap corresponding color indices
                 auxi = ids[a - 1];
                 ids[a - 1] = ids[b - 1];
@@ -58,17 +58,17 @@ void fragment() {
             }
         }
     }
-    
+
     // Normalized pixel coordinates (centered)
     vec2 uv = FRAGCOORD.xy / resolution.y - 0.5 * vec2(resolution.x / resolution.y, 1.0);
 	uv += vec2(center_offset_x, center_offset_y); // Allow center adjustment
-    
+
     // Start with the outermost color
     vec3 col = rainbow_colors[6];
-    
+
     // Calculate distance from center
     float dist = length(uv);
-    
+
     // Determine which color ring we're in
     int idx;
     for (float z = 0.5; z < 4.0; z += 0.5) {
@@ -76,13 +76,13 @@ void fragment() {
         if ((radius[idx - 1] <= dist) && (dist <= radius[idx])) {
             col = rainbow_colors[ids[idx - 1]];
         }
-        
+
         // Draw white outlines around each expanding circle
         float current_radius = exp2(log(mod(time * z * speed, 10.0 / speed) / 9.0));
         if (abs(dist - current_radius) < outline_thickness) {
             col = vec3(1.0); // White outline
         }
     }
-    
+
     COLOR = vec4(col, 1.0);
 }
