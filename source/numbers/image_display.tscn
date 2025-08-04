@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://cj1h7tifsha4u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtmsv"]
-blend_mode = 1
 shading_mode = 0
 
 [sub_resource type="QuadMesh" id="QuadMesh_al5lm"]
+lightmap_size_hint = Vector2i(12, 12)
 material = SubResource("StandardMaterial3D_xtmsv")
 size = Vector2(2, 2)
 
