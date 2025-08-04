@@ -106,6 +106,20 @@ func _stop_drag_effects():
 
 func _on_area_entered(area: Area3D) -> void:
 	if self.value == area.value:
-		print("matched")
+		var grab_player = get_node("./window/window/AnimationPlayer")
+		get_node("./text").visible = false
+		get_node("./sign").visible = false
+		grab_player.active = true
+		get_node("./window/exploded").emitting = true
 	else:
 		_returning_home = true
+
+
+func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
+	var window_list = $"..".window_list
+	var index = window_list.find(self)
+	if index != -1:
+		window_list.remove_at(index)
+	self.queue_free()
+	if len(window_list) == 0:
+		get_parent().start_new_game()
