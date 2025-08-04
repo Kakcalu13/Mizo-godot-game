@@ -30,8 +30,3 @@ hold_click={
 
 pointing/emulate_touch_from_mouse=true
 pointing/android/enable_long_press_as_right_click=true
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
