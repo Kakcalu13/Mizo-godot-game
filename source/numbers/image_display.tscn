@@ -14,6 +14,7 @@ size = Vector2(2, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
 modulate = Color(0, 0, 0, 1)
 text = "blank"
+font_size = 100
 
 [node name="White_backgroudn" type="MeshInstance3D" parent="Text_3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
