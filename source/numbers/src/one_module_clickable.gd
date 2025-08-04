@@ -116,5 +116,10 @@ func _on_area_entered(area: Area3D) -> void:
 
 
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
-	
+	var window_list = $"..".window_list
+	var index = window_list.find(self)
+	if index != -1:
+		window_list.remove_at(index)
 	self.queue_free()
+	if len(window_list) == 0:
+		get_parent().start_new_game()
