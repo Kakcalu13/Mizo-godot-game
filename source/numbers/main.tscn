@@ -1,27 +1,35 @@
-[gd_scene load_steps=8 format=3 uid="uid://b40g1acxm6s62"]
+[gd_scene load_steps=9 format=3 uid="uid://b40g1acxm6s62"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_q0yfx"]
-[ext_resource type="Shader" path="res://assets/shaders/red_diamond.gdshader" id="2_k40ad"]
-[ext_resource type="PackedScene" uid="uid://c4xowr8t8dl4t" path="res://one_module.tscn" id="2_wvgls"]
+[ext_resource type="Shader" path="res://assets/shaders/ice_randomized.gdshader" id="1_rg150"]
+[ext_resource type="Shader" path="res://assets/shaders/test.gdshader" id="3_3op8q"]
 
-[sub_resource type="Sky" id="Sky_y1yh4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oy0cp"]
+shader = ExtResource("1_rg150")
+shader_parameter/time_scale = 1.0
+shader_parameter/tunnel_speed = 3.0
+shader_parameter/fractal_rotation_speed = 1.0
+shader_parameter/ray_steps = 99
+shader_parameter/density_multiplier = 1.0
+shader_parameter/color_tint = Color(1, 1.1, 1.2, 1)
+
+[sub_resource type="Sky" id="Sky_0vvm6"]
+sky_material = SubResource("ShaderMaterial_oy0cp")
 
 [sub_resource type="Environment" id="Environment_pwj41"]
 background_mode = 2
-sky = SubResource("Sky_y1yh4")
+sky = SubResource("Sky_0vvm6")
 ambient_light_energy = 10.01
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_21vhr"]
 viewport_path = NodePath("background_shader/SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n6x5x"]
-shader = ExtResource("2_k40ad")
-shader_parameter/time_scale = 2.336
-shader_parameter/camera_distance = 6.382
-shader_parameter/camera_height = -0.2
-shader_parameter/rotation_speed = 0.45
-shader_parameter/mouse_override = Vector2(0, 0)
-shader_parameter/use_mouse_override = false
+shader = ExtResource("3_3op8q")
+shader_parameter/speed = 1.0
+shader_parameter/outline_thickness = 0.002
+shader_parameter/center_offset_x = 0.0
+shader_parameter/center_offset_y = 0.0
 
 [node name="Node3D" type="WorldEnvironment"]
 environment = SubResource("Environment_pwj41")
@@ -46,33 +54,5 @@ custom_minimum_size = Vector2(1080, 1080)
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="left_window_1" parent="." instance=ExtResource("2_wvgls")]
-transform = Transform3D(0.544065, 0.013556, 0.252606, 0.00938853, 0.597643, -0.0522934, -0.252795, 0.051371, 0.541715, -4.265, 1.5, 0)
-value = 5
-
-[node name="left_window_2" parent="." instance=ExtResource("2_wvgls")]
-transform = Transform3D(0.544065, 0.013556, 0.252606, 0.00938853, 0.597643, -0.0522934, -0.252795, 0.051371, 0.541715, -4.265, -1, 0)
-value = 5
-
-[node name="left_window_3" parent="." instance=ExtResource("2_wvgls")]
-transform = Transform3D(0.544065, 0.013556, 0.252606, 0.00938853, 0.597643, -0.0522934, -0.252795, 0.051371, 0.541715, -4.265, -3.5, 0)
-value = 5
-
-[node name="right_window_1" parent="." instance=ExtResource("2_wvgls")]
-transform = Transform3D(0.597571, -0.0139456, -0.0520945, 0.00938853, 0.597643, -0.0522934, 0.0531053, 0.0512666, 0.595442, 4.265, 1.5, 0)
-
-[node name="right_window_2" parent="." instance=ExtResource("2_wvgls")]
-transform = Transform3D(0.597571, -0.0139456, -0.0520945, 0.00938853, 0.597643, -0.0522934, 0.0531053, 0.0512666, 0.595442, 4.265, -1, 0)
-
-[node name="right_window_3" parent="." instance=ExtResource("2_wvgls")]
-transform = Transform3D(0.597571, -0.0139456, -0.0520945, 0.00938853, 0.597643, -0.0522934, 0.0531053, 0.0512666, 0.595442, 4.265, -3.5, 0)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.0369, 0)
-
-[connection signal="mouse_exited" from="left_window_1" to="left_window_1" method="_on_mouse_exited"]
-[connection signal="mouse_exited" from="left_window_2" to="left_window_2" method="_on_mouse_exited"]
-[connection signal="mouse_exited" from="left_window_3" to="left_window_3" method="_on_mouse_exited"]
-[connection signal="mouse_exited" from="right_window_1" to="right_window_1" method="_on_mouse_exited"]
-[connection signal="mouse_exited" from="right_window_2" to="right_window_2" method="_on_mouse_exited"]
-[connection signal="mouse_exited" from="right_window_3" to="right_window_3" method="_on_mouse_exited"]
