@@ -80,28 +80,33 @@ func _on_input_event(_camera: Node, event: InputEvent, _event_position: Vector3,
 		if not _dragging:
 			_start_drag_effects()
 			_dragging = true
-
-	else:
-		# Optional fallback if needed
-		if _dragging:
-			_stop_drag_effects()
-			_dragging = false
+#
+	#else:
+		#print(event)
+		## Optional fallback if needed
+		#if _dragging:
+			#print("hjere")
+			#_stop_drag_effects()
+			#_dragging = false
 
 
 
 func _start_shake():
 	_shaking = true
 	_shake_timer = 0.0
+	$hover.play()
 
 
 func _start_drag_effects():
 	_particles_main.emitting = true
 	_particles_top.emitting = false
+	$humming.play()
 
 
 func _stop_drag_effects():
 	_particles_main.emitting = false
 	_particles_top.emitting = true
+	$humming.stop()
 
 
 func _on_area_entered(area: Area3D) -> void:
@@ -111,8 +116,12 @@ func _on_area_entered(area: Area3D) -> void:
 		get_node("./sign").visible = false
 		grab_player.active = true
 		get_node("./window/exploded").emitting = true
+		$exploded_sound.play()
+		$humming.stop()
 	else:
 		_returning_home = true
+		_stop_drag_effects()
+		$humming.stop()
 
 
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
@@ -121,5 +130,6 @@ func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	if index != -1:
 		window_list.remove_at(index)
 	self.queue_free()
+	$humming.stop()
 	if len(window_list) == 0:
 		get_parent().start_new_game()
