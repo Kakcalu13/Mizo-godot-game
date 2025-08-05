@@ -64,16 +64,6 @@ height = 0.05
 radial_segments = 8
 rings = 4
 
-[sub_resource type="Animation" id="Animation_wqdu2"]
-resource_name = "matched_then_disappears"
-tracks/0/type = "scale_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Window")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0.0666667, 1, 0.5, 0.5, 0.5, 0.233333, 1, 0.1, 0.1, 0.1, 0.4, 1, 0.2, 0.2, 0.2, 0.566667, 1, 0.1, 0.1, 0.1, 0.7, 1, 0.1, 0.1, 0.1, 0.866667, 1, 0.05, 0.05, 0.05)
-
 [sub_resource type="Animation" id="Animation_xgubj"]
 length = 0.001
 tracks/0/type = "scale_3d"
@@ -83,6 +73,16 @@ tracks/0/path = NodePath("Window")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_wqdu2"]
+resource_name = "matched_then_disappears"
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Window")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.0666667, 1, 0.5, 0.5, 0.5, 0.233333, 1, 0.1, 0.1, 0.1, 0.4, 1, 0.2, 0.2, 0.2, 0.566667, 1, 0.1, 0.1, 0.1, 0.7, 1, 0.1, 0.1, 0.1, 0.866667, 1, 0.05, 0.05, 0.05)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g8l55"]
 _data = {
@@ -103,18 +103,15 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.74243, 0)
 shape = SubResource("BoxShape3D_qtt7w")
 
-[node name="GPUParticlesCollisionSDF3D" type="GPUParticlesCollisionSDF3D" parent="window/Window" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.91526, 0)
-size = Vector3(6, 7, 4)
-
 [node name="top" type="GPUParticles3D" parent="window"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2.77588, 0)
+physics_interpolation_mode = 2
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.44058, -2.72846)
 cast_shadow = 0
-amount = 150
+amount = 50
 lifetime = 5.0
 fixed_fps = 0
 interpolate = false
-collision_base_size = 0.04
+fract_delta = false
 process_material = SubResource("ParticleProcessMaterial_xo2lj")
 draw_pass_1 = SubResource("BoxMesh_yi1rv")
 
@@ -124,6 +121,7 @@ amount = 1000
 lifetime = 1.5
 fixed_fps = 0
 interpolate = false
+fract_delta = false
 collision_base_size = 0.04
 visibility_aabb = AABB(-1.63511, -1.25001, -1.31512, 3.0892, 2.15487, 2.91765)
 process_material = SubResource("ParticleProcessMaterial_2dfom")
