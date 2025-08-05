@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4xowr8t8dl4t"]
+[gd_scene load_steps=13 format=3 uid="uid://c4xowr8t8dl4t"]
 
 [ext_resource type="Script" path="res://src/one_module_clickable.gd" id="1_cdpov"]
 [ext_resource type="PackedScene" uid="uid://dk8vy7xbp7wea" path="res://window_and_particle.tscn" id="1_cwvvw"]
 [ext_resource type="PackedScene" uid="uid://cj1h7tifsha4u" path="res://image_display.tscn" id="2_08k7x"]
 [ext_resource type="Texture2D" uid="uid://ddp8ek6rswwmc" path="res://assets/images_particles/smoke_05.png" id="3_8xlau"]
 [ext_resource type="PackedScene" uid="uid://bdeh0b25f6370" path="res://sign_display.tscn" id="4_2nwc2"]
+[ext_resource type="AudioStream" uid="uid://42kawscs7bhg" path="res://assets/sounds/sound_effects/Ripple.ogg" id="6_6ava8"]
+[ext_resource type="AudioStream" uid="uid://djuf4gtpdu2xp" path="res://assets/sounds/sound_effects/humming.ogg" id="7_wgswm"]
+[ext_resource type="AudioStream" uid="uid://bp5cxu1eip66" path="res://assets/sounds/sound_effects/explosion_effect.ogg" id="8_r6ecb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cgumr"]
 transparency = 1
@@ -36,6 +39,9 @@ script = ExtResource("1_cdpov")
 
 [node name="Window" parent="window/window" index="0"]
 transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+
+[node name="top" parent="window/window" index="1"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.44058, 0)
 
 [node name="GPUParticles3D" parent="window/window" index="2"]
 amount = 200
@@ -70,12 +76,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.498, 0.6)
 visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+process_mode = 4
+physics_interpolation_mode = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5166, 0)
 shape = SubResource("BoxShape3D_2nmdx")
 
 [node name="sign" parent="." instance=ExtResource("4_2nwc2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.498, 0.6)
 visible = false
+
+[node name="hover" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_6ava8")
+volume_db = -10.0
+
+[node name="humming" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_wgswm")
+
+[node name="exploded_sound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_r6ecb")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]
