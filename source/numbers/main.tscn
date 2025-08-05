@@ -1,19 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b40g1acxm6s62"]
+[gd_scene load_steps=7 format=3 uid="uid://b40g1acxm6s62"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_q0yfx"]
-[ext_resource type="Shader" path="res://assets/shaders/robocop.gdshader" id="1_rrgqu"]
 [ext_resource type="Shader" path="res://assets/shaders/floating_cyan.gdshader" id="3_4i743"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oy0cp"]
-shader = ExtResource("1_rrgqu")
-shader_parameter/time_scale = 1.498
-shader_parameter/scene_time = 2.0
-shader_parameter/use_custom_time = false
-shader_parameter/enable_antialiasing = false
-shader_parameter/glow_intensity = 0.436
-
 [sub_resource type="Sky" id="Sky_0vvm6"]
-sky_material = SubResource("ShaderMaterial_oy0cp")
 
 [sub_resource type="Environment" id="Environment_pwj41"]
 background_mode = 2
