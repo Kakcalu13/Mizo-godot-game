@@ -31,3 +31,7 @@ hold_click={
 
 pointing/emulate_touch_from_mouse=true
 pointing/android/enable_long_press_as_right_click=true
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
