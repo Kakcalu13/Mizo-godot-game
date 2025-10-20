@@ -1,29 +1,59 @@
 extends Area3D
 
-# -- Shake Config --
+# Exports
+@export var camera_path: NodePath
+@export var value: int = 0  # your matching value
+
+# -- Shake & Return (unchanged) --
 @export var shake_time = 0.1
 @export var shake_strength = 0.1
-@export var value = 0
-@export var return_speed := 5.0  # Adjust for speed of returning
+@export var return_speed := 5.0
 
+# State
+var _original_position: Vector3
+var _dragging = false
+var _drag_depth = 0.0
+var _drag_offset = Vector3.ZERO
 # -- State --
 var _shaking = false
 var _shake_timer = 0.0
-var _original_position: Vector3
 var _returning_home := false
 var _mouse_inside = false
-var _dragging = false
 # -- Cached node references --
 var _particles_top: GPUParticles3D
 var _particles_main: GPUParticles3D
 
+# Nodes
+var _camera: Camera3D
+
 func _ready():
-	_original_position = self.transform.origin
-	
-	# Cache references to your particle nodes
+	_original_position = global_transform.origin
+	_camera = get_parent().get_child(0)
 	_particles_main = $window/window/GPUParticles3D
 	_particles_top = $window/window/top
+	_start_drag_effects()
 	_stop_drag_effects()
+
+func _on_input_event(_camera_node, event: InputEvent, _pos, _normal, _shape_idx):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			_dragging = true
+			var ray_origin = _camera.project_ray_origin(event.position)
+			var ray_dir    = _camera.project_ray_normal(event.position)
+			_drag_depth = ray_origin.distance_to(global_transform.origin) 
+			var hit_point = ray_origin + ray_dir * _drag_depth
+			_drag_offset = global_transform.origin - hit_point
+			_start_drag_effects()
+		elif event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+			_dragging = false
+			global_transform.origin = _original_position
+			_stop_drag_effects()
+
+	elif event is InputEventMouseMotion and _dragging:
+		var ray_origin = _camera.project_ray_origin(event.position)
+		var ray_dir    = _camera.project_ray_normal(event.position)
+		var hit_point  = ray_origin + ray_dir * _drag_depth
+		global_transform.origin = hit_point + _drag_offset
 
 
 func _process(delta):
@@ -62,28 +92,9 @@ func _on_mouse_exited():
 	_stop_drag_effects()
 	_dragging = false
 
-
-func _on_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
-	if event is InputEventMouseButton and not Input.is_action_pressed("hold_click"):
-		if event.pressed:
-			_start_drag_effects()
-			_dragging = true
-		else:
-			self.transform.origin = _original_position
-			_stop_drag_effects()
-			_dragging = false
-
-	elif event is InputEventMouseMotion and Input.is_action_pressed("hold_click"):
-		var offset = Vector3(event.relative.x, -event.relative.y, 0) * 0.011
-		#global_translate(offset)
-		self.transform.origin += offset
-		if not _dragging:
-			_start_drag_effects()
-			_dragging = true
 #
 	#else:
 		#print(event)
-		## Optional fallback if needed
 		#if _dragging:
 			#print("hjere")
 			#_stop_drag_effects()
@@ -118,10 +129,15 @@ func _on_area_entered(area: Area3D) -> void:
 		get_node("./window/exploded").emitting = true
 		$exploded_sound.play()
 		$humming.stop()
+		get_parent().correct_total += 0.5
+		get_parent().find_child("background_shader").get_child(2).text = str(get_parent().correct_total)
 	else:
+		_dragging = false
 		_returning_home = true
 		_stop_drag_effects()
 		$humming.stop()
+		get_parent().wrong_total += 0.5
+		get_parent().find_child("background_shader").get_child(4).text = str(get_parent().wrong_total)
 
 
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:

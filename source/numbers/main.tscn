@@ -33,7 +33,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.66586)
 [node name="background_shader" type="Sprite3D" parent="."]
 process_mode = 4
 physics_interpolation_mode = 2
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.75665)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -5.40552)
 texture = SubResource("ViewportTexture_21vhr")
 
 [node name="SubViewport" type="SubViewport" parent="background_shader"]
@@ -45,6 +45,56 @@ material = SubResource("ShaderMaterial_n6x5x")
 custom_minimum_size = Vector2(1080, 1080)
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="correct_label" type="Label" parent="background_shader"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.5
+offset_right = 27.5
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_vertical = 0
+text = "Correct total: "
+
+[node name="correct_total" type="Label" parent="background_shader"]
+anchors_preset = -1
+anchor_left = 0.546
+anchor_right = 0.546
+offset_left = 18.008
+offset_right = 125.008
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_vertical = 0
+text = "0"
+
+[node name="wrong_label" type="Label" parent="background_shader"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.04
+anchor_right = 0.5
+anchor_bottom = 0.04
+offset_left = -54.0
+offset_top = 0.079998
+offset_right = 53.0
+offset_bottom = 23.08
+grow_horizontal = 2
+size_flags_vertical = 0
+text = "Wrong total: "
+
+[node name="wrong_total" type="Label" parent="background_shader"]
+anchors_preset = -1
+anchor_left = 0.546
+anchor_top = 0.035
+anchor_right = 0.546
+anchor_bottom = 0.035
+offset_left = 17.008
+offset_top = 2.32
+offset_right = 124.008
+offset_bottom = 25.32
+grow_horizontal = 2
+size_flags_vertical = 0
+text = "0"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.0369, 0)

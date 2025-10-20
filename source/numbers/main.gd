@@ -11,6 +11,8 @@ var window_transforms = {
 var window_list = []
 var banned_list = ["robocop.gdshader", "color_sky.gdshader"]
 var WindowScene = preload("res://one_module.tscn")
+var correct_total = 0
+var wrong_total = 0
 
 func _ready() -> void:
 	start_new_game()
@@ -86,4 +88,3 @@ func _load_random_shader_material() -> void:
 		var mat = ShaderMaterial.new()
 		mat.shader = random_shader
 		color_rect.material = mat
-		print("Applied shader: ", filename)
